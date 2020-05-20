@@ -1923,6 +1923,37 @@ variable "database_outbound_acl_rules" {
     },
   ]
 }
+variable "kafka_inbound_acl_rules" {
+  description = "Database subnets inbound network ACL rules"
+  type        = list(map(string))
+
+  default = [
+    {
+      rule_number = 100
+      rule_action = "allow"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    },
+  ]
+}
+
+variable "kafka_outbound_acl_rules" {
+  description = "Database subnets outbound network ACL rules"
+  type        = list(map(string))
+
+  default = [
+    {
+      rule_number = 100
+      rule_action = "allow"
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_block  = "0.0.0.0/0"
+    },
+  ]
+}
 
 variable "redshift_inbound_acl_rules" {
   description = "Redshift subnets inbound network ACL rules"
