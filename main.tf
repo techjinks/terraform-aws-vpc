@@ -1060,17 +1060,17 @@ resource "aws_route" "private_ipv6_egress" {
   egress_only_gateway_id      = element(aws_egress_only_internet_gateway.this.*.id, 0)
 }
 
-resource "aws_route" "kafka_nat_gateway" {
-  count = var.create_vpc && var.enable_nat_gateway ? local.nat_gateway_count : 0
-
-  route_table_id         = element(aws_route_table.kafka.*.id, count.index)
-  destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = element(aws_nat_gateway.this.*.id, count.index)
-
-  timeouts {
-    create = "5m"
-  }
-}
+// resource "aws_route" "kafka_nat_gateway" {
+//   count = var.create_vpc && var.enable_nat_gateway ? local.nat_gateway_count : 0
+//
+//   route_table_id         = element(aws_route_table.kafka.*.id, count.index)
+//   destination_cidr_block = "0.0.0.0/0"
+//   nat_gateway_id         = element(aws_nat_gateway.this.*.id, count.index)
+//
+//   timeouts {
+//     create = "5m"
+//   }
+// }
 
 ##########################
 # Route table association
