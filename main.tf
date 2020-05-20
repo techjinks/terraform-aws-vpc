@@ -1086,7 +1086,8 @@ resource "aws_route_table_association" "private" {
 }
 
 resource "aws_route_table_association" "kafka" {
-  count = var.create_vpc && length(var.kafka_subnets) > 0 && false == var.enable_public_kafka ? length(var.kafka_subnets) : 0
+  // count = var.create_vpc && length(var.kafka_subnets) > 0 && false == var.enable_public_kafka ? length(var.kafka_subnets) : 0
+  count = var.create_vpc && length(var.kafka_subnets) > 0 ? length(var.kafka_subnets) : 0
 
   subnet_id = element(aws_subnet.kafka.*.id, count.index)
   route_table_id = element(
