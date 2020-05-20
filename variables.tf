@@ -208,6 +208,12 @@ variable "intra_subnets" {
   default     = []
 }
 
+variable "create_kafka_subnet_route_table" {
+  description = "Controls if separate route table for database should be created"
+  type        = bool
+  default     = false
+}
+
 variable "create_database_subnet_route_table" {
   description = "Controls if separate route table for database should be created"
   type        = bool
@@ -250,6 +256,12 @@ variable "create_redshift_subnet_group" {
   default     = true
 }
 
+variable "create_kafka_internet_gateway_route" {
+  description = "Controls if an internet gateway route for public database access should be created"
+  type        = bool
+  default     = false
+}
+
 variable "create_database_internet_gateway_route" {
   description = "Controls if an internet gateway route for public database access should be created"
   type        = bool
@@ -257,6 +269,12 @@ variable "create_database_internet_gateway_route" {
 }
 
 variable "create_database_nat_gateway_route" {
+  description = "Controls if a nat gateway route should be created to give internet access to the database subnets"
+  type        = bool
+  default     = false
+}
+
+variable "create_kafka_nat_gateway_route" {
   description = "Controls if a nat gateway route should be created to give internet access to the database subnets"
   type        = bool
   default     = false
@@ -1521,6 +1539,12 @@ variable "public_acl_tags" {
 }
 
 variable "private_acl_tags" {
+  description = "Additional tags for the private subnets network ACL"
+  type        = map(string)
+  default     = {}
+}
+
+variable "kafka_acl_tags" {
   description = "Additional tags for the private subnets network ACL"
   type        = map(string)
   default     = {}
