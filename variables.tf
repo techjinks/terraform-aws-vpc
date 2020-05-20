@@ -28,6 +28,12 @@ variable "private_subnet_ipv6_prefixes" {
   default     = []
 }
 
+variable "kafka_subnet_ipv6_prefixes" {
+  description = "Assigns IPv6 kafka subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list"
+  type        = list
+  default     = []
+}
+
 variable "public_subnet_ipv6_prefixes" {
   description = "Assigns IPv6 public subnet id based on the Amazon provided /56 prefix base 10 integer (0-256). Must be of equal length to the corresponding IPv4 subnet list"
   type        = list
@@ -66,6 +72,12 @@ variable "assign_ipv6_address_on_creation" {
 
 variable "private_subnet_assign_ipv6_address_on_creation" {
   description = "Assign IPv6 address on private subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map_public_ip_on_launch"
+  type        = bool
+  default     = null
+}
+
+variable "kafka_subnet_assign_ipv6_address_on_creation" {
+  description = "Assign IPv6 address on kafka subnet, must be disabled to change IPv6 CIDRs. This is the IPv6 equivalent of map_public_ip_on_launch"
   type        = bool
   default     = null
 }
@@ -124,6 +136,12 @@ variable "private_subnet_suffix" {
   default     = "private"
 }
 
+variable "kafka_subnet_suffix" {
+  description = "Suffix to append to kafka subnets name"
+  type        = string
+  default     = "kafka"
+}
+
 variable "intra_subnet_suffix" {
   description = "Suffix to append to intra subnets name"
   type        = string
@@ -156,6 +174,12 @@ variable "public_subnets" {
 
 variable "private_subnets" {
   description = "A list of private subnets inside the VPC"
+  type        = list(string)
+  default     = []
+}
+
+variable "kafka_subnets" {
+  description = "A list of kafka subnets inside the VPC"
   type        = list(string)
   default     = []
 }
@@ -1406,6 +1430,12 @@ variable "private_subnet_tags" {
   default     = {}
 }
 
+variable "kafka_subnet_tags" {
+  description = "Additional tags for the kafka subnets"
+  type        = map(string)
+  default     = {}
+}
+
 variable "public_route_table_tags" {
   description = "Additional tags for the public route tables"
   type        = map(string)
@@ -1414,6 +1444,12 @@ variable "public_route_table_tags" {
 
 variable "private_route_table_tags" {
   description = "Additional tags for the private route tables"
+  type        = map(string)
+  default     = {}
+}
+
+variable "kafka_route_table_tags" {
+  description = "Additional tags for the kafka route tables"
   type        = map(string)
   default     = {}
 }
@@ -1654,6 +1690,12 @@ variable "public_dedicated_network_acl" {
 
 variable "private_dedicated_network_acl" {
   description = "Whether to use dedicated network ACL (not default) and custom rules for private subnets"
+  type        = bool
+  default     = false
+}
+
+variable "kafka_dedicated_network_acl" {
+  description = "Whether to use dedicated network ACL (not default) and custom rules for kafka subnets"
   type        = bool
   default     = false
 }

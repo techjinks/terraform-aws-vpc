@@ -88,6 +88,26 @@ output "private_subnets_ipv6_cidr_blocks" {
   value       = aws_subnet.private.*.ipv6_cidr_block
 }
 
+output "kafka_subnets" {
+  description = "List of IDs of kafka subnets"
+  value       = aws_subnet.kafka.*.id
+}
+
+output "kafka_subnet_arns" {
+  description = "List of ARNs of kafka subnets"
+  value       = aws_subnet.kafka.*.arn
+}
+
+output "kafka_subnets_cidr_blocks" {
+  description = "List of cidr_blocks of kafka subnets"
+  value       = aws_subnet.kafka.*.cidr_block
+}
+
+output "kafka_subnets_ipv6_cidr_blocks" {
+  description = "List of IPv6 cidr_blocks of kafka subnets in an IPv6 enabled VPC"
+  value       = aws_subnet.kafka.*.ipv6_cidr_block
+}
+
 output "public_subnets" {
   description = "List of IDs of public subnets"
   value       = aws_subnet.public.*.id
@@ -215,6 +235,11 @@ output "public_route_table_ids" {
 
 output "private_route_table_ids" {
   description = "List of IDs of private route tables"
+  value       = aws_route_table.private.*.id
+}
+
+output "kafka_route_table_ids" {
+  description = "List of IDs of kafka route tables"
   value       = aws_route_table.private.*.id
 }
 
@@ -350,6 +375,11 @@ output "public_network_acl_id" {
 output "private_network_acl_id" {
   description = "ID of the private network ACL"
   value       = concat(aws_network_acl.private.*.id, [""])[0]
+}
+
+output "kafka_network_acl_id" {
+  description = "ID of the kafka network ACL"
+  value       = concat(aws_network_acl.kafka.*.id, [""])[0]
 }
 
 output "intra_network_acl_id" {
